@@ -78,7 +78,10 @@ Deal Gate is a decision workflow system for evaluating inbound deals with determ
 |   `-- schema.sql
 |-- types/
 |   `-- deal.ts
-|-- middleware.ts
+|-- scripts/
+|   `-- seed-demo-data.ts
+|-- proxy.ts
+|-- vitest.config.ts
 |-- .env.example
 `-- README.md
 ```
@@ -95,6 +98,9 @@ Set values:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (for `npm run seed:demo`)
+- `DEMO_USER_ID` (existing Supabase auth user UUID)
+- `DEMO_ORG_NAME` (optional)
 - `SLACK_WEBHOOK_URL` (optional)
 
 ## Supabase Setup
@@ -112,6 +118,24 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+## Seed Demo Data
+
+```bash
+npm run seed:demo
+```
+
+This seeds one demo org and three sample deals with generated decisions/outcomes.
+
+## Lightweight Tests
+
+```bash
+npm run test
+```
+
+Includes:
+- scoring engine tests (`lib/decision-engine.test.ts`)
+- API route tests (`app/api/deals/route.test.ts`)
 
 ## Deployment (Vercel)
 
