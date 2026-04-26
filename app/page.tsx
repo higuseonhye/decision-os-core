@@ -1,65 +1,69 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-16">
+      <section className="space-y-6">
+        <p className="text-sm text-muted-foreground">Open-source infrastructure for AI-native decisions</p>
+        <h1 className="max-w-4xl text-5xl font-semibold tracking-tight">
+          Companies used to run on software. Next-generation companies run on decision systems.
+        </h1>
+        <p className="max-w-2xl text-lg text-muted-foreground">
+          Deal Gate helps founders structure inbound deal decisions with repeatable logic, instant recommendations, and outcome tracking.
+        </p>
+        <div className="flex gap-3">
+          <Link href="/auth/sign-up" className={cn(buttonVariants({ size: "lg" }))}>
+            Start Free <ArrowRight className="ml-1 h-4 w-4" />
+          </Link>
+          <Link href="/auth/sign-in" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+            View Product
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        {[
+          ["Problem", "Inbound opportunities are judged inconsistently and too late."],
+          ["Why Now", "AI-native teams need a shared operating layer for decisions."],
+          ["Decision Flow", "Submit request, review instantly, and close the loop with outcomes."],
+        ].map(([title, description]) => (
+          <Card key={title}>
+            <CardHeader>
+              <CardTitle>{title}</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">{description}</CardContent>
+          </Card>
+        ))}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Product snapshot</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {[1, 2].map((item) => (
+            <div
+              key={item}
+              className="flex h-56 items-center justify-center rounded-lg border border-dashed bg-card text-sm text-muted-foreground"
+            >
+              Screenshot placeholder {item}
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section className="rounded-xl border bg-card p-6">
+        <ul className="grid gap-3 text-sm">
+          {["Deterministic scoring engine", "Deal recommendation with risk flags", "Feedback loop for future learning"].map((item) => (
+            <li key={item} className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
